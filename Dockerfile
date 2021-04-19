@@ -2,7 +2,7 @@ FROM python:3
 
 RUN apt-get update
 RUN apt-get install python3-pip -y
-RUN pip3 install virtual env
+RUN pip3 install virtualenv
 
 WORKDIR /home/ubuntu/aws-sample-general-app-master
 COPY . .
