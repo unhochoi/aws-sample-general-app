@@ -1,4 +1,4 @@
-# aws-sample-general-app
+# flask-web-application-using-ec2
 
 ## Instruction
 1. Flask Web Application to Classify Image in EC2
