@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install python3-pip -y
 RUN pip3 install virtual env
 
-WORKDIR /home/ubuntu/flask-web-application-using-ec2
+WORKDIR /home/ubuntu/aws-sample-general-app-master
 COPY . .
 RUN mkdir -p static/uploads
 
