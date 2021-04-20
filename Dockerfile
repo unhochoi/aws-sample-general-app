@@ -12,9 +12,6 @@ RUN virtualenv venv
 RUN . venv/bin/activate
 RUN pip3 install -r requirements.txt
 
-RUN cp ./main.service /etc/systemd/system/
+EXPOSE 80
 
-EXPOSE 5000
-
-CMD ["systemctl", "start", "main"]
-CMD ["systemctl", "enable", "main"]
+CMD ["python", "./main.py"]
