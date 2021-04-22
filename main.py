@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import render_template, flash, request, redirect, url_for
+from flask import Flask, render_template, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 import os
@@ -67,11 +66,11 @@ def index():
 def submit_file():
     if request.method == 'POST':
         if 'file' not in request.files:
-            flash('No file part')
+            # flash('No file part')
             return redirect(request.url)
         file = request.files['file']
         if file.filename == '':
-            flash('No file selected for uploading')
+            # flash('No file selected for uploading')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -83,37 +82,32 @@ def submit_file():
             get_instance_info()
             return render_template('index.html', filename=filename)
         else:
-            flash('Allowed image types are -> png, jpg, jpeg, gif')
+            # flash('Allowed image types are -> png, jpg, jpeg, gif')
             return redirect(request.url)
 
 @app.route('/display/<filename>')
 def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-@app.route('/test', methods=['POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def curl_test():
-    return "SUCCESS"
-    # if request.method == 'POST':
-    #     if 'file' not in request.files:
-    #         return 'A'
-    #     file = request.files['file']
-    #     if file.filename == '':
-    #         return 'B'
-    #     if file and allowed_file(file.filename):
-    #         filename = secure_filename(file.filename)
-    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    #         result = getPrediction(filename)
-    #         for top_result in result:
-    #             print(top_result[1])
-    #             print(top_result[2])
-    #             # flash(top_result[1])
-    #             # flash(top_result[2])
-    #         # get_instance_info()
-    #         return 'SUCCESS'
-    #     else:
-    #         print('ERROR')
-    #         # flash('Allowed image types are -> png, jpg, jpeg, gif')
-    #         return 'C'
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return 'A'
+        file = request.files['file']
+        if file.filename == '':
+            return 'B'
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            result = getPrediction(filename)
+            return f"{result}"
+        else:
+            return 'Allowed image types are -> png, jpg, jpeg, gif'
+    elif request.method == 'GET':
+        return "GET Return"
+    else:
+        return "Not Matched Methods"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
