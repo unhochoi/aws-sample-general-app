@@ -4,9 +4,9 @@ sudo yum install git -y
 sudo yum install python3-pip -y
 pip3 install virtualenv
 
-cd /home/ec2-use
-git clone https://github.com/odobenuskr/aws-sample-general-app
-cd aws-sample-general-app
+cd /home/ec2-user/
+git clone https://github.com/unhochoi/flask-web-application-in-ec2.git
+cd flask-web-application-in-ec2
 mkdir -p static/uploads
 
 virtualenv venv
