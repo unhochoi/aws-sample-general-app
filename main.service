@@ -4,9 +4,9 @@ After=network.target
 
 [Service]
 User=root
-WorkingDirectory=/home/ec2-user/flask-app-in-ec2-ubuntu
-Environment="PATH=/home/ec2-user/flask-app-in-ec2-ubuntu/venv/bin"
-ExecStart=/home/ec2-user/flask-app-in-ec2-ubuntu/venv/bin/python main.py
+WorkingDirectory=/home/ec2-user/flask-app-in-ec2-linux
+Environment="PATH=/home/ec2-user/flask-app-in-ec2-linux/venv/bin"
+ExecStart=/home/ec2-user/flask-app-in-ec2-linux/venv/bin/python main.py
 Restart=always
 
 [Install]
